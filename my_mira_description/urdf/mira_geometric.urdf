@@ -32,7 +32,7 @@
   
     <link name="roll_M1_link">
         <visual>
-            <origin rpy="0 0 0" xyz="0 0 0.1"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
                 <cylinder length="0.005" radius="0.01"/>
             </geometry>
@@ -84,4 +84,67 @@
         <axis xyz="0 0 1"/>
 	</joint>
 
+    <link name="head_link">
+		<visual>
+            <origin rpy="0.0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <sphere radius="0.06"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+	</link>
+
+    <joint name="base_head_joint" type="fixed">
+    	<parent link="yaw_M3_link"/>
+    	<child link="head_link"/>
+    	<origin xyz="0 0 0.06" rpy="0 0 0"/>
+	</joint>
+
+    <link name="left_eye_link">
+		<visual>
+            <origin rpy="0.0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <cylinder radius="0.00525" length="0.00525"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+	</link>
+
+    <link name="right_eye_link">
+		<visual>
+            <origin rpy="0.0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <cylinder radius="0.00525" length="0.00525"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+	</link>
+
+    <joint name="head_lefteye_joint" type="fixed">
+        <parent link="head_link"/>
+        <child link="left_eye_link"/>
+        <origin xyz="0.0095 0.057 0.0085" rpy="-1.5708 0 0"/>
+    </joint>
+
+    <joint name="head_righteye_joint" type="fixed">
+        <parent link="head_link"/>
+        <child link="right_eye_link"/>
+        <origin xyz="-0.0095 0.057 0.0085" rpy="-1.5708 0 0"/>
+    </joint>
+
+    <link name="camera_link">
+		<visual>
+            <origin rpy="0.0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <box size="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="green"/>
+        </visual>
+	</link>
+
+    <joint name="head_camera_joint" type="fixed">
+        <parent link="head_link"/>
+        <child link="camera_link"/>
+        <origin xyz="0 0.057 0.0255" rpy="0 0 0"/>
+    </joint>
 </robot>
